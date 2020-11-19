@@ -1,7 +1,7 @@
 <?php 
 require_once 'db/rb.php';
 R::setup('mysql:host=localhost;dbname=test', 'root', '');
-$personas = R::findAll('persona'); 
+$aficiones = R::findAll('persona'); 
 ?>
 
 <h1>Lista de personas</h1>
@@ -16,7 +16,7 @@ $personas = R::findAll('persona');
 		<th>Acción</th>
 	</tr>
 
-	<?php foreach ($personas as $persona):?>
+	<?php foreach ($aficiones as $persona):?>
 	<tr>
 		<td>
 			<?=$persona->dni?>

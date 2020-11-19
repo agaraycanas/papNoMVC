@@ -1,7 +1,7 @@
 <?php 
 require_once 'db/rb.php';
 R::setup('mysql:host=localhost;dbname=test', 'root', '');
-$paises = R::findAll('pais'); 
+$aficiones = R::findAll('pais'); 
 ?>
 
 <h1>Lista de países</h1>
@@ -11,15 +11,22 @@ $paises = R::findAll('pais');
 <table border="1">
 	<tr>
 		<th>Nombre</th>
+		<th>Nacidos</th>
 		<th>Acción</th>
 	</tr>
 
-	<?php foreach ($paises as $pais):?>
+	<?php foreach ($aficiones as $pais):?>
 	<tr>
 		<td>
 			<?=$pais->nombre?>
 		</td>
-
+		
+		<td>
+			<?php foreach ($pais->ownPersonaList as $persona):?>
+				(<?=$persona->dni?>)<?=$persona->nombre?> 
+			<?php endforeach;?>
+		</td>
+		
 		<td>
 		
 		<form action="paisDpost.php" method="post">

@@ -1,7 +1,7 @@
 <?php 
 require_once 'db/rb.php';
 R::setup('mysql:host=localhost;dbname=test', 'root', '');
-$personas = R::find('persona','pais_id IS null');
+$aficiones = R::find('persona','pais_id IS null');
 ?>
 <h1>Nuevo país</h1>
 
@@ -13,7 +13,7 @@ $personas = R::find('persona','pais_id IS null');
 	
 	<fieldset>
 	<legend>Habitantes</legend>
-	<?php foreach ($personas as $persona):?>
+	<?php foreach ($aficiones as $persona):?>
 		<input type="checkbox" id="id-<?=$persona->id?>" name="idPersona[]" value="<?=$persona->id?>" >
 		<label for="id-<?=$persona->id?>"><?=$persona->nombre?></label>
 	<?php endforeach;?>
