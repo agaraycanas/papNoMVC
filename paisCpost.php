@@ -6,13 +6,13 @@ $idsPersona = isset($_POST['idPersona'])?$_POST['idPersona']:null;
 R::setup('mysql:host=localhost;dbname=test', 'root', '');
 
 if ($nombre != null &&  (R::findOne('pais','nombre=?',[$nombre]) == null) ) {
-    $persona = R::dispense('pais');
-    $persona->nombre = $nombre;
+    $pais= R::dispense('pais');
+    $pais->nombre = $nombre;
     foreach ($idsPersona as $idPersona) {
         $persona = R::load('persona',$idPersona);
-        $persona -> ownPersonaList [] = $persona;
+        $pais -> ownPersonaList [] = $persona;
     }
-    R::store($persona);
+    R::store($pais);
     header('Location:paisRget.php');
 }
 else {

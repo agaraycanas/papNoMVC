@@ -1,7 +1,8 @@
 <?php 
 require_once 'db/rb.php';
 R::setup('mysql:host=localhost;dbname=test', 'root', '');
-$aficiones = R::findAll('persona'); 
+R::setAutoResolve(true);
+$personas = R::findAll('persona'); 
 ?>
 
 <h1>Lista de personas</h1>
@@ -13,10 +14,13 @@ $aficiones = R::findAll('persona');
 		<th>DNI</th>
 		<th>Nombre</th>
 		<th>País nac.</th>
+		<th>País res.</th>
+		<th>Aficiones que me gustan</th>
+		<th>Aficiones que odio</th>
 		<th>Acción</th>
 	</tr>
 
-	<?php foreach ($aficiones as $persona):?>
+	<?php foreach ($personas as $persona):?>
 	<tr>
 		<td>
 			<?=$persona->dni?>
@@ -27,7 +31,21 @@ $aficiones = R::findAll('persona');
 		</td>
 
 		<td>
-			<?= ($persona->pais_id != null?$persona->pais->nombre:'-') ?>
+			<?= ($persona->nace_id != null?$persona->fetchAs('pais')->nace->nombre:'-') ?>
+		</td>
+		
+		<td>
+			-
+		</td>
+		
+		<td>
+			<?php foreach ($persona->ownGustaList as $gusta):?>
+				<?=$gusta->aficion->nombre?>
+			<?php endforeach;?>
+		</td>
+		
+		<td>
+			-
 		</td>
 
 		<td>
